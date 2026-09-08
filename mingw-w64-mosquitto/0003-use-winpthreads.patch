@@ -20,3 +20,14 @@
  		set (LIBRARIES ${LIBRARIES} PThreads4W::PThreads4W)
  	else()
  		set(THREADS_PREFER_PTHREAD_FLAG ON)
+--- a/apps/mosquitto_ctrl/CMakeLists.txt
++++ b/apps/mosquitto_ctrl/CMakeLists.txt
+@@ -106,7 +106,7 @@
+ 	)
+ 
+ 	if(WITH_THREADING)
+-		if(WIN32)
++		if(MSVC)
+ 			target_link_libraries(mosquitto_ctrl PRIVATE PThreads4W::PThreads4W)
+ 		else()
+ 			set(THREADS_PREFER_PTHREAD_FLAG ON)

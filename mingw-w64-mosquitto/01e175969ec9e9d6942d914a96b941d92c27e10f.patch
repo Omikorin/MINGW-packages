@@ -1,0 +1,34 @@
+From 01e175969ec9e9d6942d914a96b941d92c27e10f Mon Sep 17 00:00:00 2001
+From: "Roger A. Light" <roger@atchoo.org>
+Date: Fri, 13 Feb 2026 13:06:54 +0000
+Subject: [PATCH] Fix libmosquitto_static cmake build.
+
+---
+ ChangeLog.txt      | 1 +
+ lib/CMakeLists.txt | 7 +++++++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index acbdde28bd..65c27e5182 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -141,12 +141,19 @@ if(WITH_STATIC_LIBRARIES)
+ 		)
+ 	endif()
+ 
++	if(WITH_WEBSOCKETS AND WITH_WEBSOCKETS_BUILTIN)
++		target_include_directories(libmosquitto_static PRIVATE
++			"${mosquitto_SOURCE_DIR}/deps/picohttpparser")
++	endif()
++
++
+ 	target_link_libraries(libmosquitto_static PRIVATE ${LIBRARIES})
+ 
+ 	target_include_directories(libmosquitto_static PRIVATE
+ 		"${mosquitto_SOURCE_DIR}"
+ 		"${mosquitto_SOURCE_DIR}/include"
+ 		"${mosquitto_SOURCE_DIR}/lib"
++		"${mosquitto_SOURCE_DIR}/libcommon"
+ 	)
+ 
+ 	set_target_properties(libmosquitto_static PROPERTIES

@@ -24,6 +24,7 @@ depends=(
 makedepends=(
   "${MINGW_PACKAGE_PREFIX}-cc"
   "${MINGW_PACKAGE_PREFIX}-cmake"
+  "${MINGW_PACKAGE_PREFIX}-cunit"
   "${MINGW_PACKAGE_PREFIX}-ninja"
   "${MINGW_PACKAGE_PREFIX}-winpthreads"
   "${MINGW_PACKAGE_PREFIX}-docbook-xsl"
@@ -33,13 +34,15 @@ source=(
   '0001-mosquitto-2.0.18-fix-static-libname.patch'
   '0002-mosquitto-2.0.18-pkgconf-static-cflags.patch'
   '0003-use-winpthreads.patch'
+  '01e175969ec9e9d6942d914a96b941d92c27e10f.patch'
 )
 noextract=("${_realname}-${pkgver}.tar.gz")
 sha256sums=('fd905380691ac65ea5a93779e8214941829e3d6e038d5edff9eac5fd74cbed02'
             'SKIP'
-            '9be6dc259d3507a5c3d8d1da01555bdcac0e8e5d7619bb1a889c977611d4f914'
+            '3af68aa2d9a2b01141696fbf5f4ec8183c8748665abd79f27db689d99e0391cd'
             'c19505bec196a82c1c7955314355645eba737998cc99468a2c9836843c8a7c06'
-            'a818bb491108e042584fdf949b8c44e9859921e84ad268419d66b15f1ae71044')
+            'adbdd0203a8a2be21abdf018c424cb5b03c1006b436206e1325ac335cfcfa8bf'
+            '46a37723c8e168950a365654a38896d9d7c113fb9fcfb025b2baab2284ee45c8')
 validpgpkeys=('A0D6EEA1DCAE49A635A3B2F0779B22DFB3E717B7') # Roger A. Light <roger@atchoo.org>
 
 prepare() {
@@ -52,6 +55,8 @@ prepare() {
   patch -Nbp1 -i "${srcdir}/0002-mosquitto-2.0.18-pkgconf-static-cflags.patch"
   # It's trying to use Pthreads4W, which we don't have 
   patch -Nbp1 -i "${srcdir}/0003-use-winpthreads.patch"
+
+  patch -Nbp1 -i "${srcdir}/01e175969ec9e9d6942d914a96b941d92c27e10f.patch"
 }
 
 build() {
