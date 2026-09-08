@@ -1,33 +1,39 @@
 # Maintainer: Konstantin Podsvirov <konstantin@podsvirov.su>
 
 _realname=mosquitto
-pkgbase=mingw-w64-${_realname}
+pkgbase="mingw-w64-${_realname}"
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
 pkgver=2.1.2
 pkgrel=1
-pkgdesc="An Open Source MQTT Broker (mingw-w64)"
+pkgdesc='An Open Source MQTT Broker (mingw-w64)'
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64' 'clangarm64')
-url="https://mosquitto.org"
-msys2_repository_url="https://github.com/eclipse-mosquitto/mosquitto"
+url='https://mosquitto.org'
+msys2_repository_url='https://github.com/eclipse-mosquitto/mosquitto'
 msys2_references=(
-  "cpe: cpe:/a:eclipse:mosquitto"
+  'cpe: cpe:/a:eclipse:mosquitto'
 )
 license=('spdx:EPL-2.0 OR EDL-1.0')
-depends=("${MINGW_PACKAGE_PREFIX}-c-ares"
-         "${MINGW_PACKAGE_PREFIX}-cjson"
-         "${MINGW_PACKAGE_PREFIX}-libwebsockets"
-         "${MINGW_PACKAGE_PREFIX}-libwinpthread"
-         "${MINGW_PACKAGE_PREFIX}-openssl")
-makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
-             "${MINGW_PACKAGE_PREFIX}-cmake"
-             "${MINGW_PACKAGE_PREFIX}-ninja"
-             "${MINGW_PACKAGE_PREFIX}-winpthreads"
-             "${MINGW_PACKAGE_PREFIX}-docbook-xsl")
-source=("https://mosquitto.org/files/source/${_realname}-${pkgver}.tar.gz"{,.asc}
-        '0001-mosquitto-2.0.18-fix-static-libname.patch'
-        '0002-mosquitto-2.0.18-pkgconf-static-cflags.patch'
-        '0003-use-winpthreads.patch')
+depends=(
+  "${MINGW_PACKAGE_PREFIX}-c-ares"
+  "${MINGW_PACKAGE_PREFIX}-cjson"
+  "${MINGW_PACKAGE_PREFIX}-libwebsockets"
+  "${MINGW_PACKAGE_PREFIX}-libwinpthread"
+  "${MINGW_PACKAGE_PREFIX}-openssl"
+)
+makedepends=(
+  "${MINGW_PACKAGE_PREFIX}-cc"
+  "${MINGW_PACKAGE_PREFIX}-cmake"
+  "${MINGW_PACKAGE_PREFIX}-ninja"
+  "${MINGW_PACKAGE_PREFIX}-winpthreads"
+  "${MINGW_PACKAGE_PREFIX}-docbook-xsl"
+)
+source=(
+  "https://mosquitto.org/files/source/${_realname}-${pkgver}.tar.gz"{,.asc}
+  '0001-mosquitto-2.0.18-fix-static-libname.patch'
+  '0002-mosquitto-2.0.18-pkgconf-static-cflags.patch'
+  '0003-use-winpthreads.patch'
+)
 noextract=("${_realname}-${pkgver}.tar.gz")
 sha256sums=('fd905380691ac65ea5a93779e8214941829e3d6e038d5edff9eac5fd74cbed02'
             'SKIP'
@@ -63,28 +69,30 @@ build() {
   fi
 
   MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
-  ${MINGW_PREFIX}/bin/cmake \
+  "${MINGW_PREFIX}/bin/cmake" \
     -GNinja \
-    -DCMAKE_INSTALL_PREFIX=${MINGW_PREFIX} \
+    -DCMAKE_INSTALL_PREFIX="${MINGW_PREFIX}" \
     ${_extra_config[@]} \
     -DCMAKE_INSTALL_SBINDIR=bin \
     -DWITH_STATIC_LIBRARIES=ON \
     -DWITH_PIC=ON \
-    ../${_realname}-${pkgver}
+    "../${_realname}-${pkgver}"
 
-  ${MINGW_PREFIX}/bin/cmake --build ./
+  "${MINGW_PREFIX}/bin/cmake" --build ./
 }
 
 check() {
   cd "${srcdir}/build-${MSYSTEM}"
 
-  ${MINGW_PREFIX}/bin/ctest ./ || true
+  "${MINGW_PREFIX}/bin/ctest" ./ || true
 }
 
 package() {
   cd "${srcdir}/build-${MSYSTEM}"
 
-  DESTDIR="${pkgdir}" ${MINGW_PREFIX}/bin/cmake --install ./
+  DESTDIR="${pkgdir}" "${MINGW_PREFIX}/bin/cmake" --install ./
 
-  install -Dm644 "${srcdir}/${_realname}-${pkgver}/LICENSE.txt" "${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE"
+  cd "${srcdir}/${_realname}-${pkgver}"
+
+  install -Dm644 LICENSE.txt "${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE"
 }
