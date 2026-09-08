@@ -26,6 +26,7 @@ makedepends=(
   "${MINGW_PACKAGE_PREFIX}-cmake"
   "${MINGW_PACKAGE_PREFIX}-cunit"
   "${MINGW_PACKAGE_PREFIX}-ninja"
+  "${MINGW_PACKAGE_PREFIX}-uthash"
   "${MINGW_PACKAGE_PREFIX}-winpthreads"
   "${MINGW_PACKAGE_PREFIX}-docbook-xsl"
 )
