@@ -82,6 +82,7 @@ build() {
     -DCMAKE_INSTALL_SBINDIR=bin \
     -DWITH_STATIC_LIBRARIES=ON \
     -DWITH_PIC=ON \
+    -DWITH_CTRL_SHELL=OFF \
     "../${_realname}-${pkgver}"
 
   "${MINGW_PREFIX}/bin/cmake" --build ./
