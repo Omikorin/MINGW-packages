@@ -3,8 +3,8 @@
 _realname=soxr
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=1.0.0
-pkgrel=2
+pkgver=1.1.0
+pkgrel=1
 pkgdesc='Fast and high quality sample-rate conversion library for Python. (mingw-w64)'
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64' 'clangarm64')
@@ -28,7 +28,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-python-build"
 checkdepends=("${MINGW_PACKAGE_PREFIX}-python-pytest")
 options=('!strip')
 source=("https://pypi.org/packages/source/${_realname::1}/${_realname}/${_realname}-${pkgver}.tar.gz")
-sha256sums=('e07ee6c1d659bc6957034f4800c60cb8b98de798823e34d2a2bba1caa85a4509')
+sha256sums=('9f228ae21c78fa9359ca98d8a5e8e91f30639e438e574133dace62c5b5309e44')
 
 build() {
   export SETUPTOOLS_SCM_PRETEND_VERSION=${pkgver}
