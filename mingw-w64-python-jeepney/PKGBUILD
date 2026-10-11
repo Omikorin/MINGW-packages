@@ -1,33 +1,32 @@
-_realname=secretstorage
+# Maintainer: @naveen521kk on Github, Naveen M K <naveen521kk@gmail.com>
+
+_realname=jeepney
 pkgbase="mingw-w64-python-${_realname}"
 pkgname="${MINGW_PACKAGE_PREFIX}-python-${_realname}"
-pkgver=3.5.0
+pkgver=0.9.0
 pkgrel=1
-pkgdesc='Securely store passwords and other private data using the SecretService DBus API (mingw-w64)'
+pkgdesc='Low-level, pure Python DBus protocol wrapper (mingw-w64)'
 arch=('any')
 mingw_arch=('ucrt64' 'clang64' 'clangarm64')
-url='https://github.com/mitya57/secretstorage'
-msys2_repository_url='https://github.com/mitya57/secretstorage'
-msys2_changelog_url='https://github.com/mitya57/secretstorage/blob/master/changelog'
+url='https://gitlab.com/takluyver/jeepney'
+msys2_repository_url='https://gitlab.com/takluyver/jeepney'
 msys2_references=(
-  'anitya: 4020'
-  'archlinux: python-secretstorage'
-  'gentoo: dev-python/secretstorage'
-  'purl: pkg:pypi/secretstorage'
+  'anitya: 5314'
+  'archlinux: python-arrow'
+  'gentoo: dev-python/arrow'
+  'purl: pkg:pypi/arrow'
 )
-license=('spdx:BSD-3-Clause')
+license=('spdx:MIT')
 depends=(
   "${MINGW_PACKAGE_PREFIX}-python"
-  "${MINGW_PACKAGE_PREFIX}-python-cryptography"
-  "${MINGW_PACKAGE_PREFIX}-python-jeepney" # missing
 )
 makedepends=(
   "${MINGW_PACKAGE_PREFIX}-python-build"
+  "${MINGW_PACKAGE_PREFIX}-python-flit-core"
   "${MINGW_PACKAGE_PREFIX}-python-installer"
-  "${MINGW_PACKAGE_PREFIX}-python-setuptools"
 )
 source=("https://pypi.org/packages/source/${_realname::1}/${_realname}/${_realname}-${pkgver}.tar.gz")
-sha256sums=('f04b8e4689cbce351744d5537bf6b1329c6fc68f91fa666f60a380edddcd11be')
+sha256sums=('cf0e9e845622b81e4a28df94c40345400256ec608d0e55bb8a3feaa9163f5732')
 
 build() {
   cp -r "${_realname}-${pkgver}" "build-${MSYSTEM}" && cd "build-${MSYSTEM}"
