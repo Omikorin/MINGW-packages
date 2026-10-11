@@ -11,10 +11,10 @@ mingw_arch=('ucrt64' 'clang64' 'clangarm64')
 url='https://gitlab.com/takluyver/jeepney'
 msys2_repository_url='https://gitlab.com/takluyver/jeepney'
 msys2_references=(
-  'anitya: 5314'
-  'archlinux: python-arrow'
-  'gentoo: dev-python/arrow'
-  'purl: pkg:pypi/arrow'
+  'anitya: 19564'
+  'archlinux: python-jeepney'
+  'gentoo: dev-python/jeepney'
+  'purl: pkg:pypi/jeepney'
 )
 license=('spdx:MIT')
 depends=(
