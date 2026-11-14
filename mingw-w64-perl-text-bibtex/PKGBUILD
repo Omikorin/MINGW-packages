@@ -30,11 +30,6 @@ source=(
 )
 sha256sums=('8c67d5c85bb11720eeb01776cdddece4dc7d1480b73b9676799f95b6ea97021c')
 
-prepare() {
-  cd ${_perlname}-${pkgver}
-  patch -p1 -i "${srcdir}"/001-fix-build-with-clang.patch
-}
-
 build() {
   cp -r ${_perlname}-${pkgver} build-${MSYSTEM} && cd build-${MSYSTEM}
   PERL_MM_USE_DEFAULT=1 perl Build.PL
