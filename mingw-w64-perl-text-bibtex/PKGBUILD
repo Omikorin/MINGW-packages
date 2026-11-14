@@ -27,10 +27,8 @@ makedepends=(
 )
 source=(
   "https://cpan.metacpan.org/authors/id/A/AM/AMBS/${_perlname}-${pkgver}.tar.gz"
-  "001-fix-build-with-clang.patch"
 )
-sha256sums=('8c67d5c85bb11720eeb01776cdddece4dc7d1480b73b9676799f95b6ea97021c'
-            'cdb8931ccf087e76116647addba6527bf23e437eb72744514378c7266631e297')
+sha256sums=('8c67d5c85bb11720eeb01776cdddece4dc7d1480b73b9676799f95b6ea97021c')
 
 prepare() {
   cd ${_perlname}-${pkgver}
